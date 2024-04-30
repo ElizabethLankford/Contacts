@@ -5,6 +5,7 @@ import "./App.css";
 
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     fetchContacts();
@@ -20,7 +21,19 @@ function App() {
   return (
     <>
       <ContactList contacts={contacts} />
-      <ContactForm />
+      <button onClick={() => setIsModal((prev) => !prev)}>
+        create new contact
+      </button>
+      {isModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setIsModal((prev) => !prev)}>
+              &times;
+            </span>
+            <ContactForm />
+          </div>
+        </div>
+      )}
     </>
   );
 }

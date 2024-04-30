@@ -13,7 +13,7 @@ const ContactList = ({ contacts }) => {
   };
 
   return (
-    <div>
+    <div className="contact-list">
       <h2>Contacts</h2>
       <table>
         <thead>
