@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ContactForm = ({}) => {
+const ContactForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const ContactForm = ({}) => {
 
     const options = {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
