@@ -1,25 +1,23 @@
 /* eslint-disable react/prop-types */
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, updateContact, updateCallback }) => {
   const handleDelete = async (id) => {
-    const url = `http://127.0.0.1:5000/delete_contact/${id}`;
-    const options = {
-      method: "DELETE",
-    };
-    const response = await fetch(url, options);
-
-    const message = await response.json();
-    console.log(message);
+    try {
+      const url = `http://127.0.0.1:5000/delete_contact/${id}`;
+      const options = {
+        method: "DELETE",
+      };
+      const response = await fetch(url, options);
+      if (response.status === 200) {
+        updateCallback();
+      } else {
+        console.error("Failed to delete");
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
-  const handleUpdate = async (id) => {
-    const url = `http://127.0.0.1:5000/get_single_contact/${id}`;
-
-    const response = await fetch(url);
-
-    const message = await response.json();
-    console.log(message);
-  };
   return (
     <div className="contact-list">
       <h2>Contacts</h2>
@@ -39,7 +37,7 @@ const ContactList = ({ contacts }) => {
               <td>{contact.lastName}</td>
               <td>{contact.email}</td>
               <td>
-                <button onClick={() => handleUpdate(contact.id)}>Update</button>
+                <button onClick={() => updateContact(contact)}>Update</button>
                 <button onClick={() => handleDelete(contact.id)}>Delete</button>
               </td>
             </tr>
