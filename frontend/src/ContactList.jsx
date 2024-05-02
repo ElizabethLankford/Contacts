@@ -12,6 +12,14 @@ const ContactList = ({ contacts }) => {
     console.log(message);
   };
 
+  const handleUpdate = async (id) => {
+    const url = `http://127.0.0.1:5000/get_single_contact/${id}`;
+
+    const response = await fetch(url);
+
+    const message = await response.json();
+    console.log(message);
+  };
   return (
     <div className="contact-list">
       <h2>Contacts</h2>
@@ -31,7 +39,7 @@ const ContactList = ({ contacts }) => {
               <td>{contact.lastName}</td>
               <td>{contact.email}</td>
               <td>
-                <button>Update</button>
+                <button onClick={() => handleUpdate(contact.id)}>Update</button>
                 <button onClick={() => handleDelete(contact.id)}>Delete</button>
               </td>
             </tr>
