@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import ContactList from "./ContactList";
 import ContactForm from "./ContactForm";
+import Lottie from "react-lottie";
+import animationData from "../public/lottie-1.json";
 import "./App.css";
 
 function App() {
@@ -37,8 +39,18 @@ function App() {
     closeModal();
     fetchContacts();
   };
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <>
+      <Lottie options={defaultOptions} height={100} width={100} />
       <ContactList
         contacts={contacts}
         updateContact={openEditModal}
